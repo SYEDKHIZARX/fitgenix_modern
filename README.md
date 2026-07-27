@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # FITGENIX
 
 Adaptive, injury-aware fitness coach — **GA + RL engine** in Python, **modern web app** in Next.js, plus a **legacy Streamlit** UI in the same repo.
