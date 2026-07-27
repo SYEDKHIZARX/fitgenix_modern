@@ -1,0 +1,90 @@
+"""
+fitgenix_core — pure domain intelligence for FITGENIX.
+
+No Streamlit. No Supabase. Importable by Streamlit app, FastAPI, and tests.
+"""
+from core.ml import (
+    calculate_bmi,
+    predict_calories,
+    adaptive_ga_retrain,
+    RL_ALPHA,
+    get_rl_recommendation,
+    rl_recommend_index,
+    rl_update_from_outcomes,
+    personalize_recommendation,
+)
+from core.engine import (
+    get_streak,
+    get_best_streak,
+    get_earned_badges,
+    BADGES,
+    get_injury_safe_exercises,
+    get_blocked_groups,
+    get_modified_groups,
+    get_exercise_info,
+    get_exercise_animation,
+    pick_exercises,
+    get_schedule,
+    apply_ramp,
+    apply_progression,
+    progression_from_outcomes,
+    get_plan_data,
+    get_exercise_reason,
+    decide_action,
+    compute_plan_state_from_parts,
+    get_exercise_substitutes,
+)
+
+from data import (  # noqa: F401
+    TRAINING_TYPES,
+    EXERCISE_LIBRARY,
+    EXERCISE_META,
+    MUSCLE_SUBDIVISIONS,
+    get_exercise_meta,
+    exercise_subdivisions,
+    subdivisions_covered,
+    all_subdivisions_for_group,
+    undertrained_subdivisions,
+    score_exercise_for_rotation,
+    get_rep_scheme,
+    format_scheme,
+    allowed_equipment,
+    exercise_allowed,
+    is_recomposition_user,
+    select_cardio,
+    TRAINING_CLUSTERS,
+    cluster_for_type,
+    goal_exercise_nature,
+    split_primary_and_warmup,
+    INTENSITY_GUIDANCE,
+    get_intensity_guidance,
+    warmup_then_working_cue,
+    beat_last_time,
+    READINESS_WEIGHTS,
+    compute_readiness,
+    readiness_drivers,
+    autoregulate,
+    apply_autoreg_to_scheme,
+    autoreg_message,
+    days_for_split,
+    specialization_recovery_warning,
+    SPLIT_CHOICES,
+    build_split_schedule,
+    _EXERCISE_IMAGES,
+)
+
+__version__ = "0.1.0"
+
+__all__ = [
+    "calculate_bmi", "predict_calories", "adaptive_ga_retrain",
+    "RL_ALPHA", "get_rl_recommendation", "rl_recommend_index",
+    "rl_update_from_outcomes", "personalize_recommendation",
+    "get_streak", "get_best_streak", "get_earned_badges", "BADGES",
+    "get_injury_safe_exercises", "get_blocked_groups", "get_modified_groups",
+    "get_exercise_info", "get_exercise_animation",
+    "pick_exercises", "get_schedule",
+    "apply_ramp", "apply_progression", "progression_from_outcomes",
+    "get_plan_data", "get_exercise_reason",
+    "decide_action", "compute_plan_state_from_parts",
+    "get_exercise_substitutes",
+]

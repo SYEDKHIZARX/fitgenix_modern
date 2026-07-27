@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FITGENIX — Modernization Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --void: #080A0E;
+      --surface: #0F1218;
+      --elevated: #161B24;
+      --neon: #E8FF00;
+      --heat: #FF4D00;
+      --cool: #00B4FF;
+      --success: #00E676;
+      --text: #F0F2F5;
+      --muted: #9CA3AF;
+      --dim: #6B7280;
+      --border: rgba(255,255,255,0.08);
+      --border-neon: rgba(232,255,0,0.22);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Barlow', system-ui, sans-serif;
+      background: var(--void);
+      color: var(--text);
+      line-height: 1.55;
+      background-image:
+        radial-gradient(ellipse 80% 40% at 50% -10%, rgba(232,255,0,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 30% at 100% 80%, rgba(255,77,0,0.05) 0%, transparent 50%);
+      min-height: 100vh;
+    }
+    h1, h2, h3, h4, .display {
+      font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.02em;
+    }
+    a { color: var(--neon); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    .topnav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(15,18,24,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+    }
+    .topnav-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem;
+      justify-content: space-between;
+    }
+    .brand { font-size: 1.5rem; font-weight: 900; color: #fff; }
+    .brand span { color: var(--neon); }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--neon); text-decoration: none; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+    .eyebrow {
+      font-size: 0.72rem; font-weight: 800; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--neon); margin-bottom: 0.75rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 900; line-height: 0.95; color: #fff;
+    }
+    .hero h1 span { color: var(--neon); }
+    .hero p {
+      max-width: 640px; margin: 1rem auto 0;
+      color: var(--muted); font-size: 1.05rem; font-weight: 400;
+    }
+    .meta {
+      margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.5rem;
+      justify-content: center;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      border: 1px solid var(--border-neon); background: rgba(232,255,0,0.08); color: var(--neon);
+    }
+    .chip.heat { border-color: rgba(255,77,0,0.35); background: rgba(255,77,0,0.1); color: var(--heat); }
+    .chip.cool { border-color: rgba(0,180,255,0.35); background: rgba(0,180,255,0.1); color: var(--cool); }
+    .chip.ok { border-color: rgba(0,230,118,0.35); background: rgba(0,230,118,0.1); color: var(--success); }
+
+    section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 4.5rem;
+    }
+    section > h2 {
+      font-size: 1.85rem; font-weight: 800; color: #fff;
+      margin-bottom: 0.35rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-neon);
+      display: flex; align-items: baseline; gap: 0.6rem;
+    }
+    section > h2 .num {
+      color: var(--neon); font-size: 0.85rem; letter-spacing: 0.12em;
+      text-transform: uppercase; font-weight: 800;
+    }
+    .lede { color: var(--muted); margin: 0.75rem 0 1.25rem; max-width: 720px; }
+
+    .grid-2 { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    .grid-3 { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 720px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+      .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.15rem 1.25rem;
+    }
+    .card h3 {
+      font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;
+    }
+    .card p, .card li { font-size: 0.92rem; color: var(--muted); }
+    .card ul { padding-left: 1.1rem; margin-top: 0.4rem; }
+    .card li { margin: 0.25rem 0; }
+    .card.accent { border-color: var(--border-neon); background: linear-gradient(180deg, rgba(232,255,0,0.05), var(--surface)); }
+    .card.heat { border-left: 3px solid var(--heat); }
+    .card.ok { border-left: 3px solid var(--success); }
+    .card.cool { border-left: 3px solid var(--cool); }
+
+    table {
+      width: 100%; border-collapse: collapse; font-size: 0.88rem;
+      background: var(--surface); border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    th, td {
+      text-align: left; padding: 0.7rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th {
+      background: var(--elevated);
+      font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--neon); font-weight: 800;
+    }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: none; }
+    .yes { color: var(--success); font-weight: 700; }
+    .partial { color: var(--neon); font-weight: 700; }
+    .no { color: var(--heat); font-weight: 700; }
+
+    .arch {
+      font-family: ui-monospace, 'Cascadia Code', monospace;
+      font-size: 0.78rem; line-height: 1.45;
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.35rem;
+      color: #C9CDD4;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .arch .hl { color: var(--neon); }
+    .arch .dim { color: var(--dim); }
+
+    .flow {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
+      margin: 1rem 0;
+    }
+    .flow .step {
+      background: var(--elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem; font-weight: 600; color: #fff;
+    }
+    .flow .step strong { color: var(--neon); display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.15rem; }
+    .flow .arrow { color: var(--dim); font-weight: 800; }
+
+    .timeline { border-left: 2px solid var(--border-neon); padding-left: 1.25rem; margin-left: 0.35rem; }
+    .timeline .item { position: relative; margin-bottom: 1.35rem; }
+    .timeline .item::before {
+      content: ''; position: absolute; left: -1.5rem; top: 0.35rem;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--neon); box-shadow: 0 0 12px rgba(232,255,0,0.45);
+    }
+    .timeline h4 { font-size: 1.1rem; color: #fff; margin-bottom: 0.25rem; }
+    .timeline .when { font-size: 0.72rem; font-weight: 800; color: var(--neon); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+
+    .callout {
+      border-radius: 12px; padding: 1rem 1.2rem; margin: 1rem 0;
+      border: 1px solid var(--border-neon);
+      background: rgba(232,255,0,0.06);
+      font-size: 0.95rem; color: var(--text);
+    }
+    .callout strong { color: var(--neon); }
+
+    footer {
+      margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
+      text-align: center; color: var(--dim); font-size: 0.8rem;
+    }
+    .toc ol { padding-left: 1.25rem; color: var(--muted); }
+    .toc li { margin: 0.35rem 0; }
+    code {
+      font-family: ui-monospace, monospace; font-size: 0.85em;
+      background: var(--elevated); padding: 0.1em 0.35em; border-radius: 4px;
+      color: var(--cool);
+    }
+    .two-col-compare .old { border-top: 3px solid var(--heat); }
+    .two-col-compare .new { border-top: 3px solid var(--success); }
+  </style>
+</head>
+<body>
+
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <div class="brand display">FIT<span>GENIX</span></div>
+      <div class="nav-links">
+        <a href="#summary">Summary</a>
+        <a href="#old">Old App</a>
+        <a href="#improvements">Improvements</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#how">How It Works</a>
+        <a href="#parity">Parity</a>
+        <a href="#future">Future</a>
+        <a href="#run">Run</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <header class="hero">
+      <div class="eyebrow">Product &amp; Engineering Overview</div>
+      <h1 class="display">FIT<span>GENIX</span><br />Modernization</h1>
+      <p>
+        From a Streamlit research prototype to a modular adaptive coach:
+        pure Python intelligence, FastAPI backend, and a Next.js product UI —
+        without rewriting the science.
+      </p>
+      <div class="meta">
+        <span class="chip">Web · Next.js 15</span>
+        <span class="chip cool">API · FastAPI</span>
+        <span class="chip ok">Core · Python engine</span>
+        <span class="chip heat">Legacy · Streamlit retained</span>
+      </div>
+      <p style="margin-top:1.25rem;font-size:0.85rem;color:var(--dim);">
+        Document date: July 2026 · Project: Khizer-App / FITGENIX
+      </p>
+    </header>
+
+    <!-- TOC -->
+    <section id="summary" class="toc">
+      <h2><span class="num">01</span> Executive summary</h2>
+      <p class="lede">
+        FITGENIX is an <strong style="color:#fff">adaptive, injury-aware fitness coach</strong>.
+        The original application was a powerful but monolithic Streamlit app.
+        We extracted the brain, exposed it via API, and rebuilt the body as a
+        mobile-first web product.
+      </p>
+      <div class="grid-3">
+        <div class="card accent">
+          <h3>Problem</h3>
+          <p>One 2,300+ line Streamlit file mixed UI, auth, database, ML, and HTML plan rendering. Great for demos; weak for product UX and multi-client future (web + mobile).</p>
+        </div>
+        <div class="card ok">
+          <h3>Approach</h3>
+          <p>Keep GA/RL/plan rules in Python (<code>core/</code>). Serve them via FastAPI. Rebuild UX in Next.js with a Neon Coach design system. Streamlit remains as a transitional entrypoint.</p>
+        </div>
+        <div class="card cool">
+          <h3>Outcome so far</h3>
+          <p>Working web app (onboarding → plan → home → train → RL feedback). Engine tests green (120). API live. Cloud multi-user persistence and full feature parity still planned.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:1.25rem">
+        <strong>Guiding principle:</strong> The differentiator is adaptive intelligence (GA + personalized RL + injury-aware programming). Modernization improves delivery and UX — it does not replace the science with a static workout template.
+      </div>
+    </section>
+
+    <!-- OLD APP -->
+    <section id="old">
+      <h2><span class="num">02</span> What the old application was</h2>
+      <p class="lede">
+        Understanding the Streamlit app is essential so nothing valuable is lost in migration.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Product capabilities</h3>
+          <ul>
+            <li>39+ training modalities, goal clusters</li>
+            <li>Split-first programmes (PPL, upper/lower, full body, single-muscle)</li>
+            <li>Equipment tiers &amp; experience scaling</li>
+            <li>Injury maps, severity filters, rehab protocols</li>
+            <li>Genetic Algorithm calorie / intensity scoring + personal retrain</li>
+            <li>Q-learning intensity recommendations + personal Q-table</li>
+            <li>Done / Skip / Too hard outcomes + safety caps</li>
+            <li>Daily readiness check-in → autoregulation</li>
+            <li>Plan lifecycle (adherence, resume ramp, deload, start fresh)</li>
+            <li>Streaks, badges, Plotly charts, PDF export</li>
+            <li>Supabase auth + per-user history, plans, outcomes</li>
+          </ul>
+        </div>
+        <div class="card heat">
+          <h3>Structural pain points</h3>
+          <ul>
+            <li><strong style="color:#fff">Monolith</strong> — UI, DB, ML, HTML all in <code>streamlit_app.py</code></li>
+            <li><strong style="color:#fff">Streamlit UX ceiling</strong> — full reruns, sidebar-heavy, desktop bias</li>
+            <li><strong style="color:#fff">Plan as HTML iframe</strong> — fixed heights, hard to interact on mobile</li>
+            <li><strong style="color:#fff">Generate-first IA</strong> — “report” over “train today”</li>
+            <li><strong style="color:#fff">Fragile tests</strong> — source-sliced engine loading</li>
+            <li><strong style="color:#fff">No client API</strong> — could not power a real web/mobile shell cleanly</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="display" style="margin:1.5rem 0 0.75rem;font-size:1.25rem;color:#fff;">Old stack</h3>
+      <table>
+        <thead>
+          <tr><th>Layer</th><th>Technology</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>UI</td><td>Streamlit</td><td>Single file + inline CSS/HTML strings</td></tr>
+          <tr><td>Domain data</td><td><code>data.py</code></td><td>Libraries, splits, readiness, equipment</td></tr>
+          <tr><td>ML artifacts</td><td>joblib pickles</td><td><code>ga_model.pkl</code>, <code>q_table.pkl</code>, <code>scaler.pkl</code></td></tr>
+          <tr><td>Auth / DB</td><td>Supabase</td><td>Profiles, history, outcomes, plans, check-ins</td></tr>
+          <tr><td>Charts / PDF</td><td>Plotly, fpdf2</td><td>Progress + downloadable report</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- IMPROVEMENTS -->
+    <section id="improvements">
+      <h2><span class="num">03</span> What we improved — and how</h2>
+      <p class="lede">Concrete upgrades from the modernization work, not just “new UI.”</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Area</th>
+            <th>Before</th>
+            <th>After</th>
+            <th>How</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color:#fff">Architecture</strong></td>
+            <td>One Streamlit monolith</td>
+            <td>Layered: <code>core/</code> · <code>api/</code> · <code>web/</code></td>
+            <td>Extracted pure engine functions; Streamlit imports core; FastAPI wraps core</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Testability</strong></td>
+            <td>Exec slice of app source</td>
+            <td><code>pytest tests/test_engine.py</code> — 120 tests</td>
+            <td>Import <code>core</code> directly; no Streamlit stub required for engine</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Product UI</strong></td>
+            <td>Sidebar form → giant report</td>
+            <td>Coach loop: Home → Train → log → adapt</td>
+            <td>Next.js App Router, bottom nav, dedicated screens</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Design system</strong></td>
+            <td>Ad-hoc CSS in markdown strings</td>
+            <td>Neon Coach tokens + Tailwind + shared components</td>
+            <td><code>globals.css</code>, Button/Card/Badge, Barlow typography</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Mobile UX</strong></td>
+            <td>Desktop-oriented Streamlit</td>
+            <td>Mobile-first shell + large train controls</td>
+            <td>AppShell, sticky gym header, ≥44px outcomes</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">API surface</strong></td>
+            <td>None for clients</td>
+            <td>REST: health, readiness, plan, session, RL, substitutes</td>
+            <td>FastAPI + CORS + Next rewrite proxy</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Intelligence reuse</strong></td>
+            <td>Locked inside Streamlit</td>
+            <td>Same plan/injury/readiness/RL math for API &amp; tests</td>
+            <td><code>core/engine</code>, <code>core/ml</code>, <code>core/services</code></td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Onboarding</strong></td>
+            <td>Long always-on sidebar</td>
+            <td>4-step wizard (goal → setup → body → injury)</td>
+            <td><code>/onboarding</code> then generate plan once</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Exercise logging</strong></td>
+            <td>Nested under “see plan”</td>
+            <td>First-class Train mode + swap modal</td>
+            <td>Done / Skip / Too hard → end session RL call</td>
+          </tr>
+          <tr>
+            <td><strong style="color:#fff">Docs</strong></td>
+            <td>Sparse README</td>
+            <td>Master plan, UI track, architecture status, this overview</td>
+            <td><code>docs/*.md</code> + this HTML presentation</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="grid-2 two-col-compare" style="margin-top:1.25rem">
+        <div class="card old">
+          <h3>Old primary user path</h3>
+          <p style="margin-top:0.5rem">Fill 15+ sidebar fields → Generate Report → scroll long HTML plan / PDF → optionally log later.</p>
+        </div>
+        <div class="card new">
+          <h3>New primary user path</h3>
+          <p style="margin-top:0.5rem">Onboard once → open Home → optional check-in → Start workout → 1-tap outcomes → model adapts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section id="architecture">
+      <h2><span class="num">04</span> Architecture</h2>
+      <p class="lede">Separation of concerns: intelligence stays Python; product shell is modern web.</p>
+
+      <div class="arch"><span class="dim">┌─────────────────────────────────────────────────────────────┐
+│</span>  <span class="hl">WEB</span>  Next.js 15 · TypeScript · Tailwind · Neon Coach     <span class="dim">│
+│</span>  Routes: onboarding · home · train · plan · progress · profile
+<span class="dim">└───────────────────────────┬─────────────────────────────────┘
+                            │</span>  HTTP/JSON  (<code>/backend</code> rewrite → :8000)
+<span class="dim">┌───────────────────────────▼─────────────────────────────────┐
+│</span>  <span class="hl">API</span>  FastAPI · CORS · readiness / plan / session / RL      <span class="dim">│
+└───────────────────────────┬─────────────────────────────────┘
+                            │</span>
+<span class="dim">┌───────────────────────────▼─────────────────────────────────┐
+│</span>  <span class="hl">CORE</span>  pure Python — no Streamlit, no Supabase in engine    <span class="dim">│
+│</span>  ml/ (GA, RL, BMI) · engine/ (plan, injury, schedule…)      <span class="dim">│
+│</span>  data catalog via project <code>data.py</code>                          <span class="dim">│
+└───────────────────────────┬─────────────────────────────────┘
+                            │</span>  (next) auth + persist
+<span class="dim">┌───────────────────────────▼─────────────────────────────────┐
+│</span>  <span class="hl">SUPABASE</span>  Auth + Postgres RLS  <span class="dim">(wired in Streamlit; next for web)</span>
+<span class="dim">└─────────────────────────────────────────────────────────────┘</span>
+
+<span class="dim">Legacy:</span>  streamlit_app.py  →  imports core for pure logic; keeps auth/DB/HTML report</div>
+
+      <h3 class="display" style="margin:1.5rem 0 0.75rem;font-size:1.25rem;color:#fff;">Repository map</h3>
+      <div class="grid-3">
+        <div class="card">
+          <h3><code>core/</code></h3>
+          <ul>
+            <li><code>ml/</code> — BMI, GA, RL pure math</li>
+            <li><code>engine/</code> — schedule, selection, injury, plan, lifecycle, substitutes</li>
+            <li><code>services.py</code> — API-facing adapters</li>
+            <li><code>models/</code> — TypedDict / Pydantic shapes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><code>api/</code></h3>
+          <ul>
+            <li><code>GET /api/health</code></li>
+            <li><code>POST /api/readiness</code></li>
+            <li><code>POST /api/generate-plan</code></li>
+            <li><code>POST /api/session/today</code></li>
+            <li><code>POST /api/exercises/substitutes</code></li>
+            <li><code>GET /api/rl/recommend</code> · <code>POST /api/rl/feedback</code></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><code>web/</code></h3>
+          <ul>
+            <li>Next.js App Router</li>
+            <li>Design system components</li>
+            <li><code>FitgenixProvider</code> client state</li>
+            <li>localStorage until cloud auth</li>
+            <li>Proxy to API via Next rewrites</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <h2><span class="num">05</span> How the new application works</h2>
+      <p class="lede">End-to-end flow for a user on the modern web app.</p>
+
+      <div class="flow">
+        <div class="step"><strong>1</strong> Onboarding</div>
+        <span class="arrow">→</span>
+        <div class="step"><strong>2</strong> Generate plan (API → core)</div>
+        <span class="arrow">→</span>
+        <div class="step"><strong>3</strong> Home · readiness</div>
+        <span class="arrow">→</span>
+        <div class="step"><strong>4</strong> Train · outcomes</div>
+        <span class="arrow">→</span>
+        <div class="step"><strong>5</strong> RL feedback</div>
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card accent">
+          <h3>1 · Onboarding</h3>
+          <p>User picks goal cluster &amp; style, experience, equipment, split &amp; days, body metrics, optional injury. Profile is stored (browser for now). First plan is requested from the API.</p>
+        </div>
+        <div class="card accent">
+          <h3>2 · Plan generation</h3>
+          <p><code>POST /api/generate-plan</code> maps profile → <code>get_plan_data</code> in core: split schedule, equipment filter, injury blocks/modifies, rep schemes, 7-day structured JSON (not HTML).</p>
+        </div>
+        <div class="card accent">
+          <h3>3 · Daily Home</h3>
+          <p>Optional check-in pills (sleep, soreness, energy) → <code>/api/readiness</code> using real readiness weights/bands. Session card shows Day N focus + preview + Start CTA. Coaching banner summarizes next action.</p>
+        </div>
+        <div class="card accent">
+          <h3>4 · Train mode</h3>
+          <p>Full exercise list with large Done / Skip / Too hard controls. Optional swap loads injury- &amp; equipment-aware substitutes. Autoreg may reduce sets if readiness is low (when check-in exists).</p>
+        </div>
+        <div class="card accent">
+          <h3>5 · Learning signal</h3>
+          <p>End session sends outcomes to <code>/api/rl/feedback</code> (Q-update math). Intensity tip comes from <code>/api/rl/recommend</code>. Personal long-term Q-table storage is the next backend step.</p>
+        </div>
+        <div class="card accent">
+          <h3>6 · Plan · Progress · Profile</h3>
+          <p>Week timeline, regenerate plan, history list, edit body/training/injury and re-plan. Charts/PDF/rehab depth still expanding toward Streamlit parity.</p>
+        </div>
+      </div>
+
+      <h3 class="display" style="margin:1.5rem 0 0.75rem;font-size:1.25rem;color:#fff;">Intelligence pipeline (unchanged science)</h3>
+      <table>
+        <thead>
+          <tr><th>Module</th><th>Role</th><th>Where it lives</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GA</td><td>Activity → calorie intensity score; optional retrain on history</td><td><code>core/ml/ga.py</code></td></tr>
+          <tr><td>RL</td><td>Fatigue state → intensity; learn from outcomes; safety cap</td><td><code>core/ml/rl.py</code></td></tr>
+          <tr><td>Schedule</td><td>Split templates &amp; goal-based week structure</td><td><code>core/engine/schedule.py</code> + <code>data.py</code></td></tr>
+          <tr><td>Selection</td><td>Equipment, rotation, weighted vs bodyweight nature</td><td><code>core/engine/selection.py</code></td></tr>
+          <tr><td>Injury</td><td>Block / modify groups; safe exercise pools</td><td><code>core/engine/injury.py</code></td></tr>
+          <tr><td>Readiness</td><td>Sleep · soreness · energy · activity → band + autoreg</td><td><code>data.py</code> helpers via services</td></tr>
+          <tr><td>Lifecycle</td><td>continue / resume / deload / start fresh</td><td><code>core/engine/lifecycle.py</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- PARITY -->
+    <section id="parity">
+      <h2><span class="num">06</span> Feature parity snapshot</h2>
+      <p class="lede">Honest status so nothing is assumed complete.</p>
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>Streamlit</th><th>New web</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Plan generation (core engine)</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Shared <code>core</code></td></tr>
+          <tr><td>Injury filtering</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Via profile → API</td></tr>
+          <tr><td>Readiness + autoreg</td><td class="yes">Yes</td><td class="yes">Yes</td><td>API + Train/Home</td></tr>
+          <tr><td>Done / Skip / Too hard</td><td class="yes">Yes</td><td class="yes">Yes</td><td>Train first-class</td></tr>
+          <tr><td>Exercise substitutes</td><td class="partial">Limited</td><td class="yes">Yes</td><td>Modal + API</td></tr>
+          <tr><td>Onboarding UX</td><td class="no">Sidebar wall</td><td class="yes">Wizard</td><td>Improved IA</td></tr>
+          <tr><td>Mobile-first UI</td><td class="no">Weak</td><td class="yes">Yes</td><td>App shell</td></tr>
+          <tr><td>Supabase multi-user auth</td><td class="yes">Yes</td><td class="no">Not yet</td><td><strong>Next priority</strong></td></tr>
+          <tr><td>Persist plan / outcomes / Q-table</td><td class="yes">Yes</td><td class="partial">localStorage</td><td>Cloud next</td></tr>
+          <tr><td>Personal RL long-term</td><td class="yes">Yes</td><td class="partial">Math only</td><td>Need DB row</td></tr>
+          <tr><td>GA personal retrain in UI</td><td class="yes">Yes</td><td class="no">Not wired</td><td>Core ready</td></tr>
+          <tr><td>Rehab protocols UI</td><td class="yes">Yes</td><td class="no">Not yet</td><td>Data exists</td></tr>
+          <tr><td>PDF export</td><td class="yes">Yes</td><td class="no">Not yet</td><td>Port generate_pdf</td></tr>
+          <tr><td>Progress charts</td><td class="yes">Yes</td><td class="partial">History list</td><td>Charts next</td></tr>
+          <tr><td>Streaks &amp; badges</td><td class="yes">Yes</td><td class="partial">Basic count</td><td>Core helpers ready</td></tr>
+          <tr><td>Exercise demos / cues</td><td class="yes">Yes</td><td class="no">Not yet</td><td>Optional polish</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- FUTURE -->
+    <section id="future">
+      <h2><span class="num">07</span> Future plan</h2>
+      <p class="lede">Phased roadmap so product depth catches the old app — then exceeds it.</p>
+
+      <div class="timeline">
+        <div class="item">
+          <div class="when">Phase A · Now / next sprint</div>
+          <h4>Cloud identity &amp; memory</h4>
+          <p style="color:var(--muted);font-size:0.92rem">
+            Supabase auth on the web app. API validates JWT. Persist profile, active plan,
+            check-ins, exercise outcomes, personal Q-table, GA weights, injury profile.
+            Same user, any device — true replacement for Streamlit’s memory.
+          </p>
+        </div>
+        <div class="item">
+          <div class="when">Phase B</div>
+          <h4>Coach loop parity</h4>
+          <p style="color:var(--muted);font-size:0.92rem">
+            Full plan lifecycle from real adherence gaps (resume ramp / deload / start fresh).
+            Progression from past outcomes. Activity logging (steps / active minutes).
+            Personal RL tip from stored Q-table. Adaptation badges when something real changed.
+          </p>
+        </div>
+        <div class="item">
+          <div class="when">Phase C</div>
+          <h4>Report &amp; depth features</h4>
+          <p style="color:var(--muted);font-size:0.92rem">
+            Rehab protocol screens, progress charts, streaks/badges, PDF export endpoint,
+            model performance transparency, optional exercise demos / form cues.
+          </p>
+        </div>
+        <div class="item">
+          <div class="when">Phase D</div>
+          <h4>Product API v1 &amp; mobile</h4>
+          <p style="color:var(--muted);font-size:0.92rem">
+            Versioned public API (<code>/api/v1</code>), OpenAPI client generation, observability.
+            Then Expo / React Native app consuming the same API. PWA install as interim “app.”
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Do not start native mobile</strong> until auth + persistence and the daily loop are stable in production on web. The engine is ready; the product memory is the blocker.
+      </div>
+    </section>
+
+    <!-- RUN -->
+    <section id="run">
+      <h2><span class="num">08</span> How to run today</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>API</h3>
+          <p style="margin-top:0.5rem">From project root:</p>
+          <div class="arch" style="margin-top:0.75rem">pip install -r requirements.txt
+uvicorn api.main:app --reload --port 8000</div>
+          <p style="margin-top:0.75rem">Health: <code>http://127.0.0.1:8000/api/health</code></p>
+        </div>
+        <div class="card">
+          <h3>Web</h3>
+          <div class="arch" style="margin-top:0.75rem">cd web
+npm install
+npm run dev</div>
+          <p style="margin-top:0.75rem">App: <code>http://localhost:3000</code></p>
+          <p style="margin-top:0.5rem;font-size:0.85rem">If port 3000 is busy (old Vite), free it or use <code>npx next dev -p 3001</code>.</p>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card">
+          <h3>Engine tests</h3>
+          <div class="arch" style="margin-top:0.75rem">pytest -v tests/test_engine.py</div>
+        </div>
+        <div class="card">
+          <h3>Legacy Streamlit</h3>
+          <div class="arch" style="margin-top:0.75rem">streamlit run streamlit_app.py</div>
+          <p style="margin-top:0.5rem;font-size:0.85rem">Still uses core for pure logic; Supabase auth/DB intact.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED DOCS -->
+    <section id="docs">
+      <h2><span class="num">09</span> Related documents</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Engineering</h3>
+          <ul>
+            <li><code>docs/MODERNIZATION_PLAN.md</code> — master architecture plan</li>
+            <li><code>docs/ARCHITECTURE_TRACK_STATUS.md</code> — implementation status</li>
+            <li><code>docs/gemini_plan.md</code> — UI track companion</li>
+            <li><code>docs/COMPETITOR_UI_RESEARCH.md</code> — market UX research</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Product thesis</h3>
+          <p style="margin-top:0.5rem">
+            Open FITGENIX → see readiness in seconds → start today’s session →
+            log outcomes in 1–2 taps → the system gets smarter.
+            GA/RL is the differentiator; the homepage is the coach, not the algorithm paper.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="display" style="font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:0.35rem">
+        FIT<span style="color:var(--neon)">GENIX</span>
+      </p>
+      <p>Adaptive Fitness Intelligence · Modernization Overview</p>
+      <p style="margin-top:0.5rem">Preserve the brain. Rebuild the body. Ship the coach loop.</p>
+      <p style="margin-top:1rem">
+        Open this file in any browser · Print / PDF via browser print ·
+        Path: <code>docs/FITGENIX_OVERVIEW.html</code>
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>

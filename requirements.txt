@@ -1,0 +1,19 @@
+# FITGENIX — Streamlit Community Cloud dependencies
+# Pinned to the exact local versions that created the .pkl files.
+
+streamlit==1.57.0
+numpy==2.4.4
+pandas==3.0.2
+plotly==6.7.0
+scikit-learn==1.8.0
+joblib==1.5.3
+fpdf2
+supabase==2.30.1
+
+# Architecture track — core tests + internal API (Phase 1)
+pytest>=8.0
+fastapi>=0.115
+uvicorn[standard]>=0.30
+pydantic>=2.0
+python-dotenv>=1.0
+
